@@ -1,6 +1,7 @@
 module Yesod.FeedTypes
     ( Feed (..)
     , FeedEntry (..)
+    , PodcastEnclosure (..)
     ) where
 
 import Text.Hamlet      (Html)
@@ -28,8 +29,17 @@ data Feed url = Feed
 
 -- | Each feed entry
 data FeedEntry url = FeedEntry
-    { feedEntryLink    :: url
-    , feedEntryUpdated :: UTCTime
-    , feedEntryTitle   :: Text
-    , feedEntryContent :: Html
+    { feedEntryLink      :: url
+    , feedEntryUpdated   :: UTCTime
+    , feedEntryTitle     :: Text
+    , feedEntryContent   :: Html
+    , feedEntryEnclosure :: PodcastEnclosure url
+    }
+
+-- | A podcast enclosure specifies an url to a file, the file's length in bytes
+--   and its mime type
+data PodcastEnclosure url = PodcastEnclosure
+    { enclosureLink   :: url
+    , enclosureLength :: Int
+    , enclosureMime   :: Text
     }
